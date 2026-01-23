@@ -2,6 +2,7 @@
 Website for independent news regarding Eagle Quarter development in Newbury town centre
 # Eagle Quarter Newbury Website
 This repository contains the source code for the **Eagle Quarter Newbury** information website, built with [Astro](https://astro.build/) and hosted on [Cloudflare Pages](https://pages.cloudflare.com/). The site is fully static and optimized for SEO, featuring Markdown-based content, responsive design, and optional comment integration.
+
 ---
 ## 🏗 Development Branches & Workflow
 We use a three-stage branching workflow to ensure safe development and production deployments.
