@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import content from "../content/articles/development.md";
+---
+
+<BaseLayout title={content.frontmatter.title} description={content.frontmatter.description}>
+  <article>
+    <content.default />
+  </article>
+</BaseLayout>
