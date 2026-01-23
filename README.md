@@ -1,10 +1,29 @@
-# Eagle Quarter
-Website for independent news regarding Eagle Quarter development in Newbury town centre
-# Eagle Quarter Newbury Website
-This repository contains the source code for the **Eagle Quarter Newbury** information website, built with [Astro](https://astro.build/) and hosted on [Cloudflare Pages](https://pages.cloudflare.com/). The site is fully static and optimized for SEO, featuring Markdown-based content, responsive design, and optional comment integration.
+# 🦅 Eagle Quarter Newbury Website
+Website for independent news regarding Eagle Quarter development in Newbury town centre.
 
----
-## 🏗 Development Branches & Workflow
+This repository contains the source code for the **Eagle Quarter Newbury** information website, built with [Astro](https://astro.build/) and hosted on [Cloudflare Pages](https://pages.cloudflare.com/). The site is fully static and optimized for SEO, featuring Markdown-based content, responsive design, and optional comment integration.
+## 🤷‍♂️ Reason for building this website
+### 🗃️ Personal Portfolio Project
+This project is a self-directed exercise to explore **modern, serverless website deployment** using [Astro](https://astro.build/) and [Cloudflare Pages](https://pages.cloudflare.com/). The goal is to gain hands-on experience with:
+- **Astro framework**: Writing content in Markdown, using reusable layouts, and generating fully static HTML for performance and SEO.
+- **Serverless deployment**: Hosting on Cloudflare Pages to deliver content globally without managing web servers.
+- **Best practices focused**: Aiming to maximise key website metrics - performance, accesibility, SEO, etc. Using clean URLs, structured metadata, schema.org integration, and fast-loading pages.
+
+**This project demonstrates:**
+- Setting up static site generators
+- Integrating content in Markdown
+- Creating multi-stage development workflows (dev → staging → production)
+- Leveraging serverless hosting for performance, reliability, and scalability
+- Applying best practices at every stage of the build
+> ⚠️ This project is used as a learning exercise to enhance and expand my skills in **modern web development, infrastructure and deployment workflows**
+### ⚙️ Why I chose this stack
+This setup was intentionally selected to align with my **existing toolstack and automation-focused workflow**:
+- **Astro**: Enables rapid content updates via Markdown, making it easy to add new articles and maintain consistent layouts without rebuilding complex templates.
+- **Cloudflare Pages**: Offers **speed, global edge delivery, and automated deployment**. It integrates seamlessly with other Cloudflare tools I use on other projects, such as Workers and Turnstiles, making it easy to extend functionality with minimal configuration.
+- **Git branching and workflow**: Provides versioned development, staging, and production branches, enabling rollbacks, auditing, and safe collaboration.
+- **Immutable modular infrastructure**: Fits with my philosophy of portability, automation and reproducibility (inspired by my NixOS, Terraform/OpenTofu, docker and docker swarm projects) — prioritizing **rebuilding and redeploying cleanly** rather than repairing or patching live servers.
+> Overall, this stack allows me to **quickly iterate, deploy, and scale** while following best practices, modularity, and automation — all while learning and experimenting with modern web development techniques.
+## 🚧 Development Branches & Workflow
 We use a three-stage branching workflow to ensure safe development and production deployments.
 
 | Branch | Purpose | Cloudflare Deployment |
@@ -34,8 +53,7 @@ We use a three-stage branching workflow to ensure safe development and productio
 6. **Environment variables**: Only required if integrating Giscus comments or analytics (see Astro docs).
 7. **Custom domain**: `eaglequarter.co.uk` → set via Cloudflare Pages dashboard.
 8. **Always HTTPS**: Enable for secure connections.
----
-## 💻 Local Development
+## 🛠️ Local Development
 ### Prerequisites
 - Node.js ≥ 18
 - npm (comes with Node.js)
