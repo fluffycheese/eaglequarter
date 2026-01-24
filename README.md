@@ -57,6 +57,7 @@ We use a three-stage branching workflow to ensure safe development and productio
 ### Prerequisites
 - Node.js ≥ 18
 - npm (comes with Node.js)
+- Git (optional)
 ### Install dependencies
 ```bash
 npm install
