@@ -37,9 +37,9 @@ We use a three-stage branching workflow to ensure safe development and productio
 1. Work on `dev` locally.
 2. Test locally using `npm run dev` or `npm run preview`.
 3. Merge `dev` → `staging` and push.
-4. Cloudflare generates a preview URL for review/testing.
-5. Once approved, merge `staging` → `main`.
-6. Cloudflare deploys the production site automatically.
+4. Cloudflare automatically builds and deploys a preview URL for review/testing.
+5. Once approved, merge `staging` → `main` and push.
+6. Cloudflare automatically builds and deploys the production site.
 > **Note:** All merges should be done via pull requests to maintain a clear history and allow review.
 ---
 ## ☁️ Cloudflare Pages Setup
@@ -57,6 +57,7 @@ We use a three-stage branching workflow to ensure safe development and productio
 ### Prerequisites
 - Node.js ≥ 18
 - npm (comes with Node.js)
+- Git (optional)
 ### Install dependencies
 ```bash
 npm install
