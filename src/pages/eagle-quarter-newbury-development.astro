@@ -3,10 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { frontmatter, Content } from "../content/articles/development.md";
 ---
 
-<BaseLayout
-  title={frontmatter.title}
-  description={frontmatter.description}
->
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
   <article>
     <Content />
   </article>

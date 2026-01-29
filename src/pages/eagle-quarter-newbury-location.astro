@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { frontmatter, Content } from "../content/articles/location.md";
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description} ogImage="/images/og/location.jpg">
+  <article>
+    <Content />
+  </article>
+</BaseLayout>
