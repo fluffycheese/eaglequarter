@@ -1,5 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("news");
+const latest = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -14,6 +20,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       This independent site provides up-to-date information, planning context,
       news, and local insight into the Eagle Quarter Newbury development.
     </p>
+  </section>
+
+  <section>
+    <h2>Latest News</h2>
+
+    <div class="info-grid">
+      {latest.map(post => (
+        <a href={`/news/${post.slug}/`} class="card">
+          <strong>{post.data.title}</strong>
+          <p class="muted">{post.data.description}</p>
+        </a>
+      ))}
+    </div>
   </section>
 
   <section>

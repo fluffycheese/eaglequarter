@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("news");
+const sorted = posts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Eagle Quarter Newbury News"
+  description="Latest news and updates on the Eagle Quarter Newbury redevelopment."
+>
+  <h1>Eagle Quarter Newbury News</h1>
+
+  <div class="info-grid">
+    {sorted.map(post => (
+      <a href={`/news/${post.slug}/`} class="card">
+        <strong>{post.data.title}</strong>
+        <p class="muted">{post.data.description}</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
