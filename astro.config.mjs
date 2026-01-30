@@ -3,8 +3,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://eaglequarter.co.uk",
-  integrations: [sitemap()],
+  // integrations: [sitemap()],
   output: "static",
   trailingSlash: "always"
 });
-
