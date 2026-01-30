@@ -3,35 +3,34 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("news"))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
+  const posts = await getCollection("news");
   const PAGE_SIZE = 6;
   const totalPages = Math.ceil(posts.length / PAGE_SIZE);
 
-  return Array.from({ length: totalPages }, (_, i) => {
-    const page = i + 1;
-    return {
-      params: { page: page.toString() },
-      props: {
-        page,
-        totalPages,
-        posts: posts.slice(
-          (page - 1) * PAGE_SIZE,
-          page * PAGE_SIZE
-        )
-      }
-    };
-  });
+  return Array.from({ length: totalPages }).map((_, i) => ({
+    params: { page: String(i + 1) },
+  }));
 }
 
-const { page, totalPages, posts } = Astro.props;
+const { page } = Astro.params;
+const currentPage = Number(page);
+const PAGE_SIZE = 6;
+
+const allPosts = await getCollection("news");
+const sorted = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const totalPages = Math.ceil(sorted.length / PAGE_SIZE);
+
+const posts = sorted.slice(
+  (currentPage - 1) * PAGE_SIZE,
+  currentPage * PAGE_SIZE
+);
 ---
 <BaseLayout
   title={`News – Page ${page}`}
   description={`Eagle Quarter Newbury news archive – page ${page}`}
-  prevUrl={page > 1 ? `/news/page/${page - 1}/` : undefined}
-  nextUrl={page < totalPages ? `/news/page/${page + 1}/` : undefined}
 >
   <h1>Eagle Quarter Newbury News - Page {page}</h1>
 
@@ -54,6 +53,19 @@ const { page, totalPages, posts } = Astro.props;
       ))}
     </div>
 
+      <nav class="pagination">
+    {currentPage > 1 && (
+      <a rel="prev" href={`/news/page/${currentPage - 1}/`}>
+        ← Newer posts
+      </a>
+    )}
+
+    {currentPage < totalPages && (
+      <a rel="next" href={`/news/page/${currentPage + 1}/`}>
+        Older posts →
+      </a>
+    )}
+  </nav>
 <p>Page {page} of {totalPages}</p>
 <!-- <p>Posts on this page: {posts.length}</p> -->
 
