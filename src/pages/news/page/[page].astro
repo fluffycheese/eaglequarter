@@ -33,4 +33,28 @@ const { page, totalPages, posts } = Astro.props;
   prevUrl={page > 1 ? `/news/page/${page - 1}/` : undefined}
   nextUrl={page < totalPages ? `/news/page/${page + 1}/` : undefined}
 >
+  <h1>Eagle Quarter Newbury News - Page {page}</h1>
+
+    <div class="info-grid">
+      {posts.map((post) => (
+        <a href={`/news/${post.slug}/`} class="news-card">
+          {post.data.heroImage && (
+            <img
+              src={post.data.heroImage}
+              alt=""
+              loading="lazy"
+              class="news-card-image"
+            />
+          )}
+      <div class="news-card-body">
+        <strong>{post.data.title}</strong>
+        <p class="muted">{post.data.description}</p>
+      </div>
+    </a>
+      ))}
+    </div>
+
+<p>Page {page} of {totalPages}</p>
+<!-- <p>Posts on this page: {posts.length}</p> -->
+
 </BaseLayout>
