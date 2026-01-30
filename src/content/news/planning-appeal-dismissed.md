@@ -1,7 +1,7 @@
 ---
 title: "Eagle Quarter Planning Appeal Dismissed"
 description: "Government planning inspector dismisses appeal for Eagle Quarter redevelopment."
-pubDate: 2025-08-25
+pubDate: 2025-08-22
 tags: ["planning", "appeal", "west-berkshire"]
 sourceName: "Newbury Today"
 heroImage: "/images/news/planning-appeal.jpg"
