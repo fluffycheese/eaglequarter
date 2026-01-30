@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("news");
+
+  const tags = new Set<string>();
+  posts.forEach((post) => {
+    post.data.tags.forEach((tag) => tags.add(tag));
+  });
+
+  return Array.from(tags).map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts.filter((p) => p.data.tags.includes(tag))
+    }
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`News tagged "${tag}"`}
+  description={`News and updates about ${tag} related to Eagle Quarter Newbury`}
+>
+  <h1>News tagged: {tag}</h1>
+
+  <div class="info-grid">
+    {posts.map((post) => (
+      <a href={`/news/${post.slug}/`} class="card">
+        <strong>{post.data.title}</strong>
+        <p class="muted">{post.data.description}</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

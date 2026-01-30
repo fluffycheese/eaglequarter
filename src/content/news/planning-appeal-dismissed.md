@@ -1,9 +1,11 @@
 ---
 title: "Eagle Quarter Planning Appeal Dismissed"
 description: "Government planning inspector dismisses appeal for Eagle Quarter redevelopment."
-pubDate: 2024-10-12
+pubDate: 2025-08-25
 tags: ["planning", "appeal", "west-berkshire"]
-heroImage: "/images/pages/planning-hero.jpg"
+sourceName: "Newbury Today"
+heroImage: "/images/news/planning-appeal.jpg"
+sourceUrl: "https://www.newburytoday.co.uk/news/government-planning-inspector-rejects-kennet-centre-refusal-9430810/"
 ---
 
 The Government planning inspector has dismissed the appeal relating to the proposed Eagle Quarter redevelopment in Newbury town centre.

@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("news"))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  const PAGE_SIZE = 6;
+  const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+
+  return Array.from({ length: totalPages }, (_, i) => {
+    const page = i + 1;
+    return {
+      params: { page: page.toString() },
+      props: {
+        page,
+        totalPages,
+        posts: posts.slice(
+          (page - 1) * PAGE_SIZE,
+          page * PAGE_SIZE
+        )
+      }
+    };
+  });
+}
+
+const { page, totalPages, posts } = Astro.props;
+---
+<BaseLayout
+  title={`News – Page ${page}`}
+  description={`Eagle Quarter Newbury news archive – page ${page}`}
+  prevUrl={page > 1 ? `/news/page/${page - 1}/` : undefined}
+  nextUrl={page < totalPages ? `/news/page/${page + 1}/` : undefined}
+>
+</BaseLayout>

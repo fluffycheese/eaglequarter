@@ -2,6 +2,9 @@
 const {
   title,
   description,
+  schema,
+  prevUrl,
+  nextUrl,
   ogImage = "/og-default.jpg"
 } = Astro.props;
 ---
@@ -38,6 +41,14 @@ const {
     rel="stylesheet"
   >
   <link rel="icon" href="/favicon.svg" sizes="any" />
+  <!-- JSON-LD Schema -->
+  {schema && (
+    <script type="application/ld+json">
+      {JSON.stringify(schema)}
+    </script>
+  )}
+  {prevUrl && <link rel="prev" href={prevUrl} />}
+  {nextUrl && <link rel="next" href={nextUrl} />}
 
   <!-- Styles -->
    <style is:global>

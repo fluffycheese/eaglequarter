@@ -19,6 +19,46 @@ const { Content } = await post.render();
   title={post.data.title}
   description={post.data.description}
   ogImage={post.data.heroImage}
+  schema={[
+      {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": post.data.title,
+        "datePublished": post.data.pubDate.toISOString(),
+        "image": post.data.heroImage
+          ? `${Astro.site}${post.data.heroImage}`
+          : undefined,
+        "author": {
+          "@type": "Organization",
+          "name": "Eagle Quarter Newbury"
+        },
+        "mainEntityOfPage": Astro.url.href
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": Astro.site
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "News",
+            "item": `${Astro.site}/news/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": post.data.title,
+            "item": Astro.url.href
+          }
+        ]
+      }
+    ]}
 >
   <article>
     <h1>{post.data.title}</h1>
@@ -27,19 +67,47 @@ const { Content } = await post.render();
       {post.data.pubDate.toLocaleDateString("en-GB")}
     </p>
 
-    {post.data.heroImage && (
-      <img
-        src={post.data.heroImage}
-        alt=""
-        style="width:100%;border-radius:8px;margin:1.5rem 0;"
-      />
+    {post.data.heroImage && post.data.sourceUrl && (
+      <a
+        href={post.data.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hero-link"
+      >
+        <img
+          src={post.data.heroImage}
+          alt={`Original article image for ${post.data.title}`}
+          class="hero-image"
+          style="width:100%;border-radius:8px;margin:1.5rem 0;"
+        />
+      </a>
     )}
 
     <!-- ✅ Rendered Markdown -->
     <Content />
 
-    <p class="muted">
+    <!-- <p class="muted">
       Tags: {post.data.tags.join(", ")}
     </p>
+     -->
+    <p class="muted source">
+      Source:
+      <a
+        href={post.data.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {post.data.sourceName}
+      </a>
+    </p>
+
+    <ul class="tags">
+      {post.data.tags.map(tag => (
+        <li>
+          <a href={`/news/tags/${tag.toLowerCase()}/`}>#{tag}</a>
+        </li>
+      ))}
+    </ul>
+
   </article>
 </BaseLayout>
