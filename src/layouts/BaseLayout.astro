@@ -258,6 +258,24 @@ const {
       color: var(--muted);
     }
 
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      gap: 1rem;
+    }
+
+    .pagination a {
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .pagination a:hover {
+      border-color: var(--accent);
+    }
+
     @media (max-width: 768px) {
       .nav-links {
         position: absolute;
