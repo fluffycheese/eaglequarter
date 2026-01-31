@@ -499,35 +499,30 @@ const {
     </p>
   </div>
 </footer>
-
+<!-- Menu toggle script -->
 <script is:inline>
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('navLinks');
-
   function openMenu() {
     nav.classList.add('active');
     toggle.setAttribute('aria-expanded', 'true');
     nav.setAttribute('aria-hidden', 'false');
   }
-
   function closeMenu() {
     nav.classList.remove('active');
     toggle.setAttribute('aria-expanded', 'false');
     nav.setAttribute('aria-hidden', 'true');
   }
-
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
     nav.classList.contains('active') ? closeMenu() : openMenu();
   });
-
   /* click outside */
   document.addEventListener('click', (e) => {
     if (!nav.contains(e.target) && !toggle.contains(e.target)) {
       closeMenu();
     }
   });
-
   /* escape key */
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -536,40 +531,86 @@ const {
     }
   });
 </script>
-<!-- Cookie-less outbound link + pagination tracking -->
 <script is:inline>
+  // Advanced Engagement Tracking
   function trackEvent(name, params = {}) {
     if (typeof gtag === 'function') {
       gtag('event', name, params);
     }
   }
+  // Scroll depth tracking
+  (() => {
+    const thresholds = [25, 50, 75];
+    const fired = new Set();
 
-  // Track outbound link clicks
+    function onScroll() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight <= 0) return;
+
+      const percent = Math.round((scrollTop / docHeight) * 100);
+
+      thresholds.forEach(t => {
+        if (percent >= t && !fired.has(t)) {
+          fired.add(t);
+          trackEvent('scroll_depth', {
+            percent: t,
+            page_path: window.location.pathname
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+  // Time-on-page buckets
+  (() => {
+    const buckets = [15, 30, 60, 120];
+    const fired = new Set();
+
+    buckets.forEach(seconds => {
+      setTimeout(() => {
+        if (!fired.has(seconds)) {
+          fired.add(seconds);
+          trackEvent('time_on_page', {
+            seconds,
+            page_path: window.location.pathname
+          });
+        }
+      }, seconds * 1000);
+    });
+  })();
+  // Outbound article tracking
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href]');
     if (!link) return;
 
     const url = new URL(link.href, window.location.origin);
-
+    // Track "Read original article" links
+    if (link.dataset.original === 'true') {
+      trackEvent('original_article_click', {
+        source: url.hostname,
+        href: url.href
+      });
+      return;
+    }
+    // Generic outbound links
     if (url.origin !== window.location.origin) {
       trackEvent('outbound_click', {
-        event_category: 'outbound',
-        event_label: url.href
+        href: url.href
       });
     }
   });
-
-  // Track pagination clicks
+  // Tag engagement tracking
   document.addEventListener('click', (e) => {
-    const link = e.target.closest('a[href*="/news/page/"]');
-    if (!link) return;
+    const tag = e.target.closest('[data-tag]');
+    if (!tag) return;
 
-    trackEvent('pagination_click', {
-      event_category: 'pagination',
-      event_label: link.href
+    trackEvent('tag_click', {
+      tag: tag.dataset.tag,
+      page_path: window.location.pathname
     });
   });
 </script>
-
 </body>
 </html>
