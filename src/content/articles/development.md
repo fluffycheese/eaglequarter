@@ -4,7 +4,6 @@ description: "Overview of the Eagle Quarter redevelopment in Newbury, Berkshire.
 ---
 
 ## Eagle Quarter Newbury Development
-
 The Eagle Quarter Newbury development is a major regeneration project designed
 to modernise a central area of Newbury, Berkshire.
 
