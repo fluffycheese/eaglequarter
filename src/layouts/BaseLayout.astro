@@ -492,7 +492,7 @@ const {
       </a>
     </nav>
   </div>
-  
+
   <div class="container footer-inner">
     <p>
       <a href="/eagle-quarter-newbury-privacy/">Privacy Policy</a>
@@ -534,6 +534,40 @@ const {
       closeMenu();
       toggle.focus();
     }
+  });
+</script>
+<!-- Cookie-less outbound link + pagination tracking -->
+<script is:inline>
+  function trackEvent(name, params = {}) {
+    if (typeof gtag === 'function') {
+      gtag('event', name, params);
+    }
+  }
+
+  // Track outbound link clicks
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+
+    const url = new URL(link.href, window.location.origin);
+
+    if (url.origin !== window.location.origin) {
+      trackEvent('outbound_click', {
+        event_category: 'outbound',
+        event_label: url.href
+      });
+    }
+  });
+
+  // Track pagination clicks
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href*="/news/page/"]');
+    if (!link) return;
+
+    trackEvent('pagination_click', {
+      event_category: 'pagination',
+      event_label: link.href
+    });
   });
 </script>
 
