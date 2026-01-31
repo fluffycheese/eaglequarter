@@ -3,6 +3,15 @@ Website for independent news regarding Eagle Quarter development in Newbury town
 
 This repository contains the source code for the **Eagle Quarter Newbury** information website, built with [Astro](https://astro.build/) and hosted on [Cloudflare Pages](https://pages.cloudflare.com/). The site is fully static and optimized for SEO, featuring Markdown-based content, responsive design, and optional comment integration.
 ## 🤷‍♂️ Reason for building this website
+### A local publishing experiment, a technical playground, and a slow return to building on the web
+#### What this project is
+This repository powers eaglequarter.co.uk, a small but growing independent site covering:
+- The Eagle Quarter development in Newbury
+- Wider Newbury town centre regeneration
+- Editorials and news about independent local businesses (retailers, restaurants, cafés)
+- Community perspectives and long-form pieces written by people who actually live and work here
+
+At its core, this is a local publishing project — but it’s also a technical learning exercise, a portfolio piece, and a place for me to indulge a long-standing obsession with infrastructure, automation, and new frameworks.
 ### 🗃️ Personal Portfolio Project
 This project is a self-directed exercise to explore **modern, serverless website deployment** using [Astro](https://astro.build/) and [Cloudflare Pages](https://pages.cloudflare.com/). The goal is to gain hands-on experience with:
 - **Astro framework**: Writing content in Markdown, using reusable layouts, and generating fully static HTML for performance and SEO.
