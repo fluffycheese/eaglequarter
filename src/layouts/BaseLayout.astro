@@ -17,12 +17,26 @@ const {
   <meta name="description" content={description} />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QC2JTMPDS5"></script>
-
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied'
+    });
+
     gtag('js', new Date());
-    gtag('config', 'G-QC2JTMPDS5');
+
+    gtag('config', 'G-QC2JTMPDS5', {
+      anonymize_ip: true,
+      send_page_view: true
+    });
+  </script>
+  <!-- Cloudflare Web Analytics -->
+  <script defer 
+    src='https://static.cloudflareinsights.com/beacon.min.js' 
+    data-cf-beacon='{"token": "4a23c53b40e34662a6ed1dd09dfb8a38"}'>
   </script>
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
