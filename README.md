@@ -12,12 +12,30 @@ This repository powers eaglequarter.co.uk, a small but growing independent site 
 - Community perspectives and long-form pieces written by people who actually live and work here
 
 At its core, this is a local publishing project — but it’s also a technical learning exercise, a portfolio piece, and a place for me to indulge a long-standing obsession with infrastructure, automation, and new frameworks.
+### Why this exists
+I haven’t built a website from the ground up in ~20 years.In that time, my career has been focused on:
+- Server and platform infrastructure
+- Reliability, availability, and operations
+- Consulting on systems rather than owning end-to-end delivery
+
+Most of my day-to-day work has lived in:
+- Terraform / OpenTofu
+- NixOS
+- Docker (including Swarm)
+- Systems design, automation, and failure modes
+
+This project is me deliberately stepping back into:
+- Modern frontend tooling
+- Static-first publishing
+- SEO-aware content delivery
+- Simple systems that scale socially, not just technically
+
+I wanted something real, with real users and constraints — not a tutorial app.
 ### 🗃️ Personal Portfolio Project
 This project is a self-directed exercise to explore **modern, serverless website deployment** using [Astro](https://astro.build/) and [Cloudflare Pages](https://pages.cloudflare.com/). The goal is to gain hands-on experience with:
 - **Astro framework**: Writing content in Markdown, using reusable layouts, and generating fully static HTML for performance and SEO.
 - **Serverless deployment**: Hosting on Cloudflare Pages to deliver content globally without managing web servers.
 - **Best practices focused**: Aiming to maximise key website metrics - performance, accesibility, SEO, etc. Using clean URLs, structured metadata, schema.org integration, and fast-loading pages.
-
 **This project demonstrates:**
 - Setting up static site generators
 - Integrating content in Markdown
