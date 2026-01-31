@@ -93,7 +93,7 @@ eaglequarter/
 ├── src/
 │   ├── layouts/              # Shared layouts (BaseLayout.astro)
 │   ├── pages/                # Astro pages (.astro)
-│   └── content/articles/     # Markdown content files
+│   └── content/              # Markdown content files
 ├── .gitignore                # Files and folders to ignore in Git
 └── README.md
 ```
@@ -112,3 +112,26 @@ This workflow ensures:
 - Automated production deployment to live site (main)
 
 Following this workflow keeps content consistent, previewable, and SEO-optimized.
+## 📝 Automated local news ingestion
+- Automated local news aggregation
+- Human-reviewed AI editorial workflow
+- Immutable content pipeline
+- SEO-first static publishing
+- No scraping abuse
+- Clear attribution & ethics
+### 🤖 n8n workflow
+```bash
+Cron
+  ↓
+Search / Crawl sources
+  ↓
+Filter Eagle Quarter relevance
+  ↓
+Deduplicate vs existing posts
+  ↓
+AI summarise + rewrite
+  ↓
+Generate Markdown frontmatter + content
+  ↓
+Commit to GitHub (dev branch, src/content/news/draft folder)
+```
