@@ -12,6 +12,7 @@ const {
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
+
   <meta charset="utf-8" />
   <title>{title}</title>
   <meta name="description" content={description} />
@@ -50,7 +51,15 @@ const {
   )}
   {prevUrl && <link rel="prev" href={prevUrl} />}
   {nextUrl && <link rel="next" href={nextUrl} />}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QC2JTMPDS5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-QC2JTMPDS5');
+  </script>
   <!-- Styles -->
    <style is:global>
 
