@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { frontmatter, Content } from "../content/pages/privacy.md";
+---
+
+<BaseLayout 
+    title={frontmatter.title} 
+    description={frontmatter.description} 
+    ogImage="/images/og/home.jpg"
+>
+  <article>
+    <Content />
+  </article>
+
+</BaseLayout>
