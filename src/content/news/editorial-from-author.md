@@ -16,4 +16,6 @@ There are pros and cons. On one hand, thoughtful redevelopment can rejuvenate ne
 
 I’ve also leveraged this project as a way for me to explore some *bleeding edge* web technologies that I have not used before — see the *README* on this websites [GitHub repository](https://github.com/fluffycheese/eaglequarter) for details on architecture, SEO strategy and automated, static deployment workflows (e.g., Astro, Cloudflare Pages, Git, n8n). I am also an advocate for online privacy and open source software — **all** the source code for this website is available on the [GitHub repository](https://github.com/fluffycheese/eaglequarter), I have made a concerted effort to collect as little data as possible and to create a transparent and readable [privacy policy](/eagle-quarter-newbury-privacy/).
 
+I haven’t built a website from the ground up in ~20 years. I wanted something real, with real users and constraints.
+
 Thank you for reading, and I welcome contributions, corrections, and community feedback as this journey continues.
