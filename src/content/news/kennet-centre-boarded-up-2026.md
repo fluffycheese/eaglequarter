@@ -1,7 +1,7 @@
 ---
 title: "Kennet Centre Boarded Up Ahead of Redevelopment"
 description: "The long-standing Kennet Centre site in Newbury has been boarded up as the next stage of town-centre regeneration approaches."
-pubDate: 2026-02-15
+pubDate: 2026-02-07
 tags: ["kennet-centre", "redevelopment", "community"]
 heroImage: "/images/news/kennet-centre-boarded-up.jpg"
 sourceName: "Newbury Today"
