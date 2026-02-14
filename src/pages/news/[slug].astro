@@ -67,7 +67,7 @@ const { Content } = await post.render();
       {post.data.pubDate.toLocaleDateString("en-GB")}
     </p>
 
-    {post.data.heroImage && post.data.sourceUrl && (
+    <!-- {post.data.heroImage && post.data.sourceUrl && (
       <a
         href={post.data.sourceUrl}
         target="_blank"
@@ -81,15 +81,40 @@ const { Content } = await post.render();
           style="width:100%;border-radius:8px;margin:1.5rem 0;"
         />
       </a>
+    )} -->
+
+    {post.data.heroImage && post.data.sourceUrl && (
+      <a
+        href={post.data.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hero-link"
+      >
+        <div class="hero-wrapper">
+          <img
+            src={post.data.heroImage}
+            alt={`Original article image for ${post.data.title}`}
+            class="hero-image"
+          />
+
+          <div class="hero-overlay">
+            <span class="hero-source">
+              {post.data.sourceName}
+            </span>
+            <span class="hero-cta">
+              Click to view article →
+            </span>
+          </div>
+        </div>
+      </a>
     )}
+
+
+
 
     <!-- ✅ Rendered Markdown -->
     <Content />
 
-    <!-- <p class="muted">
-      Tags: {post.data.tags.join(", ")}
-    </p>
-     -->
     <p class="muted source">
       Source:
       <a

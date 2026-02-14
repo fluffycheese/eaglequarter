@@ -185,6 +185,55 @@ const {
 
     .hero { padding-bottom: 2rem; }
 
+    .hero-wrapper {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.2)
+      );
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .hero-source {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .hero-cta {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .hero-wrapper:hover .hero-overlay {
+      opacity: 1;
+    }
+
+    .hero-wrapper:hover .hero-image {
+      transform: scale(1.03);
+    }
+
     .muted { color: var(--muted); }
 
     .info-grid {
@@ -206,7 +255,7 @@ const {
     }
 
     .card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px);      
       border-color: var(--accent);
       box-shadow: 0 4px 12px rgba(235, 232, 232, 0.06);
       opacity: 0.65;
