@@ -4,6 +4,8 @@ description: "An editorial explaining the motivations behind this site, combinin
 pubDate: 2026-01-28
 tags: ["editorial", "community", "local"]
 heroImage: "/images/news/market-place.webp"
+sourceName: "EagleQuarter.co.uk"
+sourceUrl: "https://eaglequarter.co.uk"
 ---
 
 I live just a five-minute walk from the redevelopment site at the heart of Newbury, and I work locally. I’ve always valued the character of Newbury — its independent shops, cafes and restaurants — and watched its evolution with a mix of optimism and concern. When the opportunity came to register [**eaglequarter.co.uk**](https://eaglequarter.co.uk), I saw a chance to create something that serves both local residents *and* the broader community with clear, factual information about this major redevelopment initiative.

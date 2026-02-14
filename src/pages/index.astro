@@ -13,7 +13,7 @@ const latest = posts
   description="Independent information site covering the Eagle Quarter Newbury redevelopment, including news, planning updates and local context."
   ogImage="/images/og/home.jpg"
   >
-  <section class="hero">
+  <section>
     <h1>Eagle Quarter Newbury - Redevelopment Updates, News & Information</h1>
     <p class="muted">
       Eagle Quarter is a major mixed-use redevelopment in Newbury, Berkshire.
@@ -22,6 +22,35 @@ const latest = posts
     </p>
   </section>
 
+  <section>
+    <h2>Latest News</h2>
+  </section>
+
+  <section class="hero-carousel">
+    {latest.slice(0,3).map((post, index) => (
+      <a
+        href={`/news/${post.slug}/`} 
+        class={`carousel-card ${index === 0 ? "active" : ""}`}
+        data-index={index}
+      >
+        <img
+          src={post.data.heroImage}
+          alt={post.data.title}
+          class="carousel-image"
+        />
+        <div class="carousel-overlay">
+          <h2>{post.data.title}</h2>
+        </div>
+      </a>
+    ))}
+  </section>
+
+  <section>
+    <nav class="pagination">
+      <a href="/news/page/1/">View all news →</a>
+    </nav>
+  </section>
+<!-- 
   <section>
     <h2>Latest News</h2>
 
@@ -43,7 +72,7 @@ const latest = posts
     </a>
       ))}
     </div>
-  </section>
+  </section> -->
 
   <section>
     <h2>What is Eagle Quarter Newbury?</h2>
@@ -130,4 +159,38 @@ const latest = posts
       is compiled from publicly available sources for research and reference.
     </p>
   </section>
+
+  <script>
+    const container = document.querySelector<HTMLDivElement>('.hero-carousel')!;
+
+    let cards = Array.from(container.children) as HTMLElement[];
+
+    function rotate() {
+      if (cards.length === 0) return;
+      container.appendChild(cards[0]);
+      cards = Array.from(container.children) as HTMLElement[];
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        const frontCard = cards[0];
+        if (card !== frontCard) {
+          e.preventDefault();
+          rotate();
+        }
+      });
+    });
+
+    let startX = 0;
+
+    container.addEventListener('touchstart', (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchend', (e: TouchEvent) => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff < -50) rotate();
+    });
+  </script>
+
 </BaseLayout>

@@ -67,22 +67,6 @@ const { Content } = await post.render();
       {post.data.pubDate.toLocaleDateString("en-GB")}
     </p>
 
-    <!-- {post.data.heroImage && post.data.sourceUrl && (
-      <a
-        href={post.data.sourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hero-link"
-      >
-        <img
-          src={post.data.heroImage}
-          alt={`Original article image for ${post.data.title}`}
-          class="hero-image"
-          style="width:100%;border-radius:8px;margin:1.5rem 0;"
-        />
-      </a>
-    )} -->
-
     {post.data.heroImage && post.data.sourceUrl && (
       <a
         href={post.data.sourceUrl}
@@ -102,7 +86,7 @@ const { Content } = await post.render();
               {post.data.sourceName}
             </span>
             <span class="hero-cta">
-              Click to view article →
+              Click to view source →
             </span>
           </div>
         </div>
