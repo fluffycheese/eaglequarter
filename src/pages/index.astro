@@ -15,7 +15,7 @@ const latest = posts
   >
   <section>
     <h1>Eagle Quarter Newbury - Redevelopment Updates, News & Information</h1>
-    <p class="muted">
+    <p class= "p-mobile-hidden">
       Eagle Quarter is a major mixed-use redevelopment in Newbury, Berkshire.
       This independent site provides up-to-date information, planning context,
       news, and local insight into the Eagle Quarter Newbury development.
@@ -24,28 +24,25 @@ const latest = posts
 
   <section>
     <h2>Latest News</h2>
-  </section>
-
-  <section class="hero-carousel">
-    {latest.slice(0,3).map((post, index) => (
-      <a
-        href={`/news/${post.slug}/`} 
-        class={`carousel-card ${index === 0 ? "active" : ""}`}
-        data-index={index}
-      >
-        <img
-          src={post.data.heroImage}
-          alt={post.data.title}
-          class="carousel-image"
-        />
-        <div class="carousel-overlay">
-          <h2>{post.data.title}</h2>
-        </div>
-      </a>
-    ))}
-  </section>
-
-  <section>
+      <section class="hero-carousel">
+        {latest.slice(0,3).map((post, index) => (
+          <a
+            href={`/news/${post.slug}/`} 
+            class={`carousel-card ${index === 0 ? "active" : ""}`}
+            data-index={index}
+          >
+            <img
+              src={post.data.heroImage}
+              alt={post.data.title}
+              class="carousel-image"
+            />
+            <div class="carousel-overlay">
+              <h2>{post.data.title}</h2>
+              <p class= "fadeInUp-animation muted">{post.data.description}</p>
+            </div>
+          </a>
+        ))}
+      </section>
     <nav class="pagination">
       <a href="/news/page/1/">View all news →</a>
     </nav>

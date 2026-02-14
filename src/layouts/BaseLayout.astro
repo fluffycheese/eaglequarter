@@ -79,7 +79,7 @@ const {
     :root {
       --bg: #181a1b;
       --text: #cdc8c2;
-      --muted: #9e9589;
+      --muted: #cfc6bb;
       --accent: #a7f6f6;
       --border: #363b3d;
       --max-width: 1100px;
@@ -157,7 +157,8 @@ const {
     }
 
     .nav-links a:hover {
-      opacity: 0.65;
+      opacity: 0.75;
+      color: var(--accent);
     }
 
     .menu-toggle {
@@ -182,6 +183,27 @@ const {
     }
 
     p { max-width: 70ch; }
+
+    @media (max-width: 768px) {
+      .p-mobile-hidden {
+        display: none;
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0%);
+        opacity: 1;
+      }
+    }
+
+    .fadeInUp-animation {
+      animation: 1.5s fadeInUp;
+    }
 
     .hero { padding-bottom: 2rem; }
 
@@ -259,6 +281,7 @@ const {
       border-color: var(--accent);
       box-shadow: 0 4px 12px rgba(235, 232, 232, 0.06);
       opacity: 0.65;
+      color: var(--accent);
     }
     .card-image {
       width: 100%;
@@ -296,7 +319,8 @@ const {
       transform: translateY(-2px);
       border-color: var(--accent);
       box-shadow: 0 4px 12px rgba(235, 232, 232, 0.06);
-      opacity: 0.65;
+      opacity: 0.75;
+      color: var(--accent);
     }
 
     .news-card-image {
@@ -367,7 +391,7 @@ const {
       z-index: 1;
       transform: translateX(160px) scale(0.9);
       opacity: 0.55;
-      width: 100%;
+      width: 99%;
     }
 
     /* Image */
@@ -387,7 +411,9 @@ const {
       position: absolute;
       inset: 0;
       display: flex;
-      align-items: flex-end;
+      /* align-items: flex-end; */
+      flex-direction: column;
+      justify-content: flex-end;
       padding: 2rem;
       background: linear-gradient(
         to top,
@@ -397,16 +423,24 @@ const {
       );
     }
 
-    /* Mobile styling */
     .carousel-overlay h2 {
       margin: 0;
       font-size: 1.8rem;
-      max-width: 80%;
+      max-width: 70%;
     }
+    .carousel-overlay p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      max-width: 70%;
+    }
+    /* .carousel-card:hover .carousel-overlay p {
+      opacity: 1;
+    } */
 
+    /* Mobile styling */
     @media (max-width: 768px) {
       .container .hero-carousel {
-        height: 300px;
+        height: 450px;
       }
       .carousel-card:nth-child(2) {
         transform: translateX(15px) scale(0.95);
@@ -417,7 +451,15 @@ const {
         width: 100%;
       }
       .carousel-overlay h2 {
-        font-size: 1.2rem;
+        font-size: 1.0rem;
+        max-width: 800%;
+      }
+      .carousel-overlay p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        max-width: 90%;
       }
     }
 
@@ -465,6 +507,7 @@ const {
 
     .social-links a:hover svg {
       fill: var(--accent);
+      opacity: 0.75;
     }
 
     .pagination {
