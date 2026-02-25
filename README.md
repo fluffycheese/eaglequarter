@@ -1,11 +1,11 @@
 # 🦅 Eagle Quarter Newbury Website
-Website for independent news regarding Eagle Quarter development in Newbury town centre.
+[Website for independent news](https://eaglequarter.co.uk) regarding Eagle Quarter development in Newbury town centre.
 
 This repository contains the source code for the **Eagle Quarter Newbury** information website, built with [Astro](https://astro.build/) and hosted on [Cloudflare Pages](https://pages.cloudflare.com/). The site is fully static and optimized for SEO, featuring Markdown-based content, responsive design, and optional comment integration.
 ## 🤷‍♂️ Reason for building this website
 ### A local publishing experiment, a technical playground, and a slow return to building on the web
 #### What this project is
-This repository powers eaglequarter.co.uk, a small but growing independent site covering:
+This repository powers [eaglequarter.co.uk](https://eaglequarter.co.uk), a small but growing independent site covering:
 - The Eagle Quarter development in Newbury
 - Wider Newbury town centre regeneration
 - Editorials and news about independent local businesses (retailers, restaurants, cafés)
