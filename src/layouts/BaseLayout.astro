@@ -30,10 +30,10 @@ const {
 
     gtag('config', 'G-QC2JTMPDS5', {
       anonymize_ip: true,
-      send_page_view: true
+      send_page_view: true,
+      cookie_flags: 'SameSite=None;Secure;httpOnly'
     });
 
-    gtag('set', 'cookie_flags', 'SameSite=None;Secure;httpOnly');
   </script>
   <!-- Cloudflare Web Analytics -->
   <script defer 
