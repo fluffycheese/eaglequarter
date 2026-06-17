@@ -1,0 +1,475 @@
+{
+  "name": "Eagle Quarter – Daily News Draft Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 4
+            }
+          ]
+        }
+      },
+      "name": "Daily Cron",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        -96
+      ],
+      "id": "e4a05ea4-9812-482e-bb33-b15343f33999"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"title\"]}}",
+              "operation": "regex",
+              "value2": "(Eagle Quarter|Kennet Centre|Newbury regeneration|forecast)"
+            }
+          ]
+        }
+      },
+      "name": "Relevance Filter",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        -96
+      ],
+      "id": "6c02d2b0-e8fc-4ad8-9d05-734c104f73ce"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "owner": "fluffycheese",
+        "repository": "eaglequarter"
+      },
+      "name": "List Existing Drafts",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -288
+      ],
+      "id": "9e1a5d56-784d-4fc6-9228-4b8066757dee",
+      "webhookId": "f5bed170-b4e7-4979-bf49-644778f2365d",
+      "credentials": {
+        "githubApi": {
+          "id": "CAWkbnTJlBnlg3wS",
+          "name": "GitHub account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "chatgpt-image-latest",
+        "prompt": "write a balanced news article based on this",
+        "options": {},
+        "requestOptions": {}
+      },
+      "name": "Write Draft Article",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        256,
+        -288
+      ],
+      "id": "7b82d19d-fae6-4bbe-b629-4c0220670773",
+      "credentials": {
+        "openAiApi": {
+          "id": "cc3AEdhygnEB8hN8",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.google.com/alerts/feeds/16375232571172860732/3034879923004475451",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        -96
+      ],
+      "id": "92d2fce1-52bc-47c3-b390-6ebf633c2417",
+      "name": "RSS Read",
+      "notesInFlow": true,
+      "notes": "\"Newbury development\" feed"
+    },
+    {
+      "parameters": {
+        "url": "https://www.google.com/alerts/feeds/16375232571172860732/4785651695367225486",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        -288
+      ],
+      "id": "0daecbb9-f162-464b-b80b-21fffb22354a",
+      "name": "RSS Read1",
+      "notesInFlow": true,
+      "notes": "\"Newbury Eagle Quarter\" feed"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "value": "fluffycheese",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "https://github.com/fluffycheese/eaglequarter",
+          "mode": "url"
+        },
+        "filePath": "src/content/news"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        768,
+        -288
+      ],
+      "id": "7c12705e-816d-4156-8380-2e31a417feb8",
+      "name": "List files",
+      "webhookId": "904f16b6-4f67-48e6-b7a8-e0c6724b4a88",
+      "credentials": {
+        "githubApi": {
+          "id": "CAWkbnTJlBnlg3wS",
+          "name": "GitHub account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "fluffycheese",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "eaglequarter",
+          "mode": "name"
+        },
+        "filePath": "src/content/news/drafts/{slug}.md",
+        "commitMessage": "draft(news): add article on Kennet Centre planning update",
+        "additionalParameters": {
+          "branch": {
+            "branch": "dev"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        768,
+        -96
+      ],
+      "id": "7e1a6056-9dd3-4a51-8e9a-1cf3101334c7",
+      "name": "Commit draft to GitHub",
+      "webhookId": "62c96225-b468-499e-83d7-e5c6913a834a",
+      "credentials": {
+        "githubApi": {
+          "id": "CAWkbnTJlBnlg3wS",
+          "name": "GitHub account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const today = new Date().toISOString().split('T')[0];\n\nconst markdown = `---\ntitle: \"${$json.title}\"\ndescription: \"Independent summary of recent developments relating to Eagle Quarter in Newbury.\"\npubDate: ${today}\ntags: [\"eagle quarter\", \"newbury\", \"regeneration\"]\ndraft: true\n---\n\n${$json.text}`;\n\nreturn [{\n  content: markdown,\n  filename: $json.filename\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        -96
+      ],
+      "id": "d159d5f0-72bb-44b9-8d74-93df6cbfd9dc",
+      "name": "Fomat Markdown"
+    },
+    {
+      "parameters": {
+        "jsCode": "const slug = $json.title\n  .toLowerCase()\n  .replace(/[^a-z0-9]+/g, '-')\n  .replace(/(^-|-$)/g, '');\n\nreturn [{\n  ...$json,\n  slug,\n  filename: `${new Date().toISOString().split('T')[0]}-${slug}.md`\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        -96
+      ],
+      "id": "9bd157cd-1ea2-43d8-be82-27ff50026a92",
+      "name": "Generate slug"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -480,
+        -112
+      ],
+      "id": "a6baa4b4-5865-4ebf-a5ae-f0c85788ba7d",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "content": "## Testing\nChange regex before production",
+        "height": 96,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -272,
+        32
+      ],
+      "typeVersion": 1,
+      "id": "8cc56cc5-0bea-4c75-8b2a-4c12c7f2090a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "fromEmail": "n8n-eaglequarter@highclere.tv",
+        "toEmail": "sdj.house2024@gmail.com",
+        "subject": "New EagleQuarter draft in dev",
+        "html": "<a href=\"https://github.com/fluffycheese/eaglequarter/tree/dev/src/pages\">GitHub pages dev branch</a>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        992,
+        -96
+      ],
+      "id": "a0ae1079-5433-4aea-8b91-bf084806dc69",
+      "name": "Send email",
+      "webhookId": "76adea61-5ffe-4a87-a254-c56bf6b9830b",
+      "credentials": {
+        "smtp": {
+          "id": "scBLPnD8jaHRo5X9",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.google.com/alerts/feeds/16375232571172860732/11419286326282395261",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        96
+      ],
+      "id": "74286e07-9fed-465b-97bc-7b568d647b61",
+      "name": "RSS Read2",
+      "notesInFlow": true,
+      "alwaysOutputData": false,
+      "notes": "\"Newbury Kennet Centre\" feed"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "Using the \"Link\", analyze the news article. Then write an independent local news summary.\n\nRequirements:\n- Neutral, factual tone\n- UK English\n- 600–900 words\n- No speculation\n- Attribute original source clearly\n- Add local context for Newbury residents\n- SEO-friendly headings\n- Do NOT copy original wording\n\nOutput Markdown only."
+            }
+          ]
+        },
+        "simplify": false,
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        192,
+        -96
+      ],
+      "id": "14a2f42b-0c39-4d8a-8e59-b844c853c909",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "cc3AEdhygnEB8hN8",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Relevance Filter": {
+      "main": [
+        [
+          {
+            "node": "Generate slug",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Draft Article": {
+      "main": [
+        []
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Daily Cron": {
+      "main": [
+        [
+          {
+            "node": "RSS Read1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS Read2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List Existing Drafts": {
+      "main": [
+        [
+          {
+            "node": "List files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate slug": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fomat Markdown": {
+      "main": [
+        [
+          {
+            "node": "Commit draft to GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List files": {
+      "main": [
+        []
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Relevance Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit draft to GitHub": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Fomat Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "34f6ed38-e460-4e62-b649-a3bbd387f1cc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "600f56a4ff3004c9d2c2f2a0d20d30407dc7937b29ba69286f372aa7dcff59c9"
+  },
+  "id": "szWH3lxS7hJSMuwU",
+  "tags": []
+}
